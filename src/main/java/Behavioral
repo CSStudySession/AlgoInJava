@@ -1,0 +1,75 @@
+General Guideline for Behavioral Interview
+
+1. STAR framework
+    Situation, Task, Action, Result
+
+2. Research the company and your interviewers
+
+3. Get a list of 10 interesting questions
+
+
+
+Self-Awareness (Biggest Strength and Weakness / view of co-workers / Who is your role model ?)
+    a. if allowed, better to talk about strength and weakness at the same time
+    b. strength :
+        - requirement clarification : i am good at figuring out all the requirements that customers are looking for
+        - success reinforcement : once requirement/ goal is set, i am good at self-tracking to ensure final goal is met
+        - detail orientated : good at paying attention to details/edge cases; for example, UI alignment or edge cases
+
+    c. weakness :
+        - refactor so that deadline is missed : code refactor delay the progress , fixed by better time management
+        - not really know how to refuse : whenever colleagues ask for help, will help but need to spend extra time on my work
+
+
+
+Motivation and Values (What interests you from this company / What drags you out of bed / Any questions)
+
+    a. company's core values
+    b. what matters you the most?
+        1. Stability : write a stable code/function
+        2. Scale : write a easily-scalable code/function
+        3. Make something benefits the world
+        4. core values : ex. in airbnb, i would like to make this world a harmony place so that everyone can feel belonged anywhere
+    c. What 3-5 words will you use to describe the team's culture?
+    d. What does your day look like?
+    e. How satisfied is the team with their career development?
+
+
+
+Conflict Resolution
+    a. NOT to talk about a situation that conflict is resolved by 3rd party; showing aggression or restlessness; rise of a new conflict
+    b. better to apply STAR framework
+    c. One time my code review of issue A has been filed for a long time, and one of my reviewers does not approve or make any comments on my review.
+        Because it has been a long time, and my manager asks me how is the progress for issue A, I decide to ask him whether he can finish the code review ASAP.
+        It turns out that he is kinda frustrated and annoyed to my requests. First of all, it does surprise me because of his attitude. However, I remain calmed and
+        tell him that because my manager is pushing me for this fix, I just want to check how things are going on his side but not blaming him for anything.
+        Then he tells me nicely that he is frustrated because of overloaded workload on his hand. Therefore, both of us go to manager and tell him the situation,
+        so that manager assigns some of his works to other engineers so that he has time to complete my code review.
+
+    d. Disagree with Leadership
+        -   Once decision is made in a meeting, even though disagreed, we should stick it to the end without any purpose of destruction
+    e. Experience of Compromising
+        -   One time we are discussing about the implementing a new monitoring feature in slightly old version in a meeting. I suggest that we should implement in Python
+            because in the latest version all the code related to platform level is implemented in Python, and since we are monitoring platform objects such as NTP,
+            we should do it in Python. However, one of colleague disagrees because of this old version has different platform structure than the new version. It takes
+            more time to ensure the same functionality works when High Availability comes into play. Since my colleague's point is correct, a comprise is made. The main body
+            of feature is implemented in Python, but the execution and the high availability related code is handled in Java.
+
+
+Prioritization and Time Management
+    a. Prioritize many important items
+        -   Deprioritize the item
+        -   Reduce scope to focus on what you have to get done by deadline
+        -   Negotiate the deadline
+        -   Ask for help
+        -   organize time effectively
+    b. Overcome a project delay
+
+
+
+Teamwork
+    a. Working with difficult people / tailor your style to drive success
+        -   Find out why this people is hard to work with
+        -   If your project is not high on her priority, you should find ways to get priorities aligned. You may be able to do this by stopping by her desk or leveraging your manager or her manager’s help.
+        -   If she is swamped with high priority deliverables, can you ask another person to help? Alternatively, can you recommend someone else to help you?
+        -   If the managers are not aligned, should you try to talk to the manager directly or push your manager to work with the other manager to get aligned?
