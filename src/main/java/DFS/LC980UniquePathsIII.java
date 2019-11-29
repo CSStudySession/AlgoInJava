@@ -72,7 +72,7 @@ public class LC980UniquePathsIII {
         }
 
         // 这里需要特判！因为搜索入口的值是1不是0！！
-        if (grid[i][j] == 0) curZeroCnt+=1;
+        if (grid[i][j] == 0) curZeroCnt += 1;
         int prev = grid[i][j];
         // 这里可以改用Set来判断走过的路径
         grid[i][j] = -1;
