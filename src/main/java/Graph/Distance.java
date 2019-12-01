@@ -1,4 +1,4 @@
-package graph;
+package Graph;
 
 /**
  * distance from source to given vertex

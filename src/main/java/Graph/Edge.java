@@ -1,4 +1,4 @@
-package graph;
+package Graph;
 
 /**
  * weighted edge for a directed graph.
