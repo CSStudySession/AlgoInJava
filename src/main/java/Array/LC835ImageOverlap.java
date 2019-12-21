@@ -24,6 +24,10 @@ import java.util.*;
  * Notes:
  * 1 <= A.length = A[0].length = B.length = B[0].length <= 30
  * 0 <= A[i][j], B[i][j] <= 1
+ *
+ * 思路:
+ * 枚举所有可能的位移 然后把A矩阵的所有1都按照位移量位移 统计覆盖的1的个数
+ * 注意如何定义Point：重写equals和hashCode方法
  */
 public class LC835ImageOverlap {
 

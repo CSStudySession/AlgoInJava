@@ -38,6 +38,12 @@ package Math;
  *   [12, 6, 8, 9],
  *   [16, 7,10,11]
  * ]
+ *
+ * 思路:
+ * 1. transpose the matrix
+ * 2. flip each row of transposed matrix
+ *
+ * followup: what if counter clock wise? -> 先flip再transposes
  */
 public class LC48RotateImage {
 
