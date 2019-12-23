@@ -56,6 +56,7 @@ public class LC980UniquePathsIII {
 
         int[] di = {0, 0, 1, -1};
         int[] dj = {1, -1, 0, 0};
+        // 存储总路径和
         int[] ret = {0};
 
         dfs(grid, si, sj, 0, zeroCnt, di, dj, ret);
@@ -64,15 +65,19 @@ public class LC980UniquePathsIII {
 
     private void dfs(int[][] grid, int i, int j, int curZeroCnt,
                      int zeroCnt, int[] di, int[] dj, int[] ret) {
+        // 到达终点
         if (grid[i][j] == 2) {
+            // 所有的0都不重不漏的走完
             if (curZeroCnt == zeroCnt) {
                 ret[0]++;
             }
+            // 不管怎样都要return
             return;
         }
 
         // 这里需要特判！因为搜索入口的值是1不是0！！
         if (grid[i][j] == 0) curZeroCnt += 1;
+        // 记住当前坐标的值 方便回溯的时候重置
         int prev = grid[i][j];
         // 这里可以改用Set来判断走过的路径
         grid[i][j] = -1;
@@ -84,6 +89,7 @@ public class LC980UniquePathsIII {
                     grid[ni][nj] == -1) continue;
             dfs(grid, ni, nj, curZeroCnt, zeroCnt, di, dj, ret);
         }
+        // 回溯
         grid[i][j] = prev;
     }
 
@@ -94,12 +100,3 @@ public class LC980UniquePathsIII {
         System.out.println(".");
     }
 }
-
-
-
-
-
-
-
-
-

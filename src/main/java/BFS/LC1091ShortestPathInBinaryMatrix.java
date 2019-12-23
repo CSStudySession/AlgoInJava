@@ -29,44 +29,48 @@ import java.util.Queue;
  * grid[r][c] is 0 or 1
  */
 public class LC1091ShortestPathInBinaryMatrix {
-    private int[][] dir = new int[][]{{0,1},{0,-1},{1,0},{-1,0},{1,-1},{-1,1},{-1,-1},{1,1}};
+    private int dir[][] = new int[][]{{0,1},{0,-1},{1,0},{-1,0},{1,-1},{-1,1},{-1,-1},{1,1}};
 
     public int shortestPathBinaryMatrix(int[][] grid) {
 
         int m = grid.length;
         int n = grid[0].length;
 
-        if(grid[0][0] == 1 || grid[m-1][n-1] == 1) {
+        if (grid[0][0] == 1 || grid[m - 1][n - 1] == 1) {
             return -1;
         }
 
-        boolean[][] visited = new boolean[m][n];
-        visited[0][0] = true;
+        // queue里存数组
         Queue<int[]> queue = new LinkedList<>();
-        queue.add(new int[] {0,0});
+        queue.add(new int[]{0,0});
+        // [0,0] mark as visited
+        grid[0][0] = 1;
+        int ans = 0;
 
-        int ans=0;
         while (!queue.isEmpty()) {
             int size = queue.size();
             for(int i = 0;i < size; i++) {
                 int[] pop = queue.poll();
                 if(pop[0] == m-1 && pop[1] == n-1) {
+                    // 因为是返回length 而不是距离 所以最后要+1
                     return ans+1;
                 }
-                // 八个方向上产生下一步坐标 然后依据是否合法入队
-                for (int k = 0; k < 8; k++) {
-                    int nextX = dir[k][0] + pop[0];
-                    int nextY = dir[k][1] + pop[1];
 
-                    if(nextX >= 0 && nextX < m && nextY >= 0 && nextY < n &&
-                            !visited[nextX][nextY] && grid[nextX][nextY] == 0) {
-                        queue.add(new int[] {nextX,nextY});
-                        visited[nextX][nextY] = true;
+                for (int k = 0; k < 8; k++) {
+                    int nextI = dir[k][0] + pop[0];
+                    int nextJ = dir[k][1] + pop[1];
+
+                    if(nextI >= 0 && nextI < m && nextJ >= 0 && nextJ < n &&
+                            grid[nextI][nextJ] == 0) {
+                        queue.add(new int[]{nextI,nextJ});
+                        // mark this coordinate as visited
+                        grid[nextI][nextJ] = 1;
                     }
                 }
             }
             ans++;
         }
+
         return -1;
     }
 }
