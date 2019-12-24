@@ -28,6 +28,7 @@ import java.util.PriorityQueue;
 public class LC1046LastStoneWeight {
 
     public int lastStoneWeight(int[] stones) {
+        // 建大根堆
         PriorityQueue<Integer> maxPq = new PriorityQueue<>(stones.length, (s1, s2) -> (s2 - s1));
         for (int stone : stones) {
             maxPq.offer(stone);
@@ -41,6 +42,7 @@ public class LC1046LastStoneWeight {
                 maxPq.add(y - x);
             }
         }
+
         return maxPq.isEmpty() ? 0 : maxPq.peek();
     }
 }
