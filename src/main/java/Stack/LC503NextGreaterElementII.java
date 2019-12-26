@@ -18,6 +18,12 @@ import java.util.Stack;
  * The second 1's next greater number needs to search circularly, which is also 2.
  *
  * Note: The length of given array won't exceed 10000.
+ *
+ * 思路：
+ * 解决循环数组问题的方法之一：倍增
+ * nums: 1, 2, 1
+ * 倍增后: 1, 2, 1 || 1, 2, 1
+ *                   i = i % nums.length where i in [0, 2*nums.length)
  */
 public class LC503NextGreaterElementII {
 
@@ -27,11 +33,12 @@ public class LC503NextGreaterElementII {
         Arrays.fill(ret, -1);
         // stack里面存下标 而不是元素!!
         Stack<Integer> st = new Stack<>();
-        for (int i = 0; i < 2 * nums.length - 1; i++) {
+        for (int i = 0; i < 2 * nums.length; i++) {
             int num = nums[i % nums.length];
             // 注意下面是 && 的关系！
             while (!st.isEmpty() && nums[st.peek()] < num) {
-                ret[st.peek()] = num;
+                // 注意这里是st.pop() 只要栈顶下标对应的元素比num小 num就是它右面第一个比它大的
+                ret[st.pop()] = num;
             }
             /*
             只有当i小于length的时候才压栈 后面的循环都只是为了

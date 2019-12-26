@@ -33,7 +33,10 @@ import java.util.Stack;
 public class LC496NextGreaterElementI {
 
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        // 映射:<元素, 第一个比它大的后面的元素>
         Map<Integer, Integer> map = new HashMap<>();
+
+        // 单调递减栈 栈顶元素最小 栈里存的是元素
         Stack<Integer> stack = new Stack<>();
 
         for (int num : nums2) {
@@ -51,6 +54,7 @@ public class LC496NextGreaterElementI {
         for (int i = 0; i < nums1.length; i++) {
             nums1[i] = map.getOrDefault(nums1[i], -1);
         }
+
         return nums1;
     }
     
