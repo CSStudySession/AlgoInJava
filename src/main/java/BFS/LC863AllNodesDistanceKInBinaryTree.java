@@ -65,7 +65,6 @@ public class LC863AllNodesDistanceKInBinaryTree {
     private void construct(TreeNode root, TreeNode pre,
                            Map<TreeNode, List<TreeNode>> graph) {
         if (root == null) return;
-        if (graph.containsKey(root)) return;
 
         if (pre != null) {
             graph.putIfAbsent(root, new ArrayList<>());

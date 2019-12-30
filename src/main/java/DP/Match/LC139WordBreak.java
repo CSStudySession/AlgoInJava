@@ -1,26 +1,25 @@
 package DP.Match;
 
-/*
-Given a string s and a dictionary of words dict, determine if s can be segmented into a space-separated sequence of one or more dictionary words.
-
-For example, given
-s = "leetcode",
-dict = ["leet", "code"].
-
-Return true because "leetcode" can be segmented as "leet code".
-
-f[i] 表示前i个字符是否可以分。
-从前往后枚举结尾。对于每个结尾枚举分成的最后一段的长度j。然后看f[i-j]是否可分。
-
-initialize dp[s.length() + 1], dp[0] = true
-dp function: dp[i] = dp[j] & (s[j, i] in dict)
-result: dp[s.length()]
- */
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
+/*
+* Given a string s and a dictionary of words dict, determine if s can be segmented into a
+* space-separated sequence of one or more dictionary words.
+*
+* For example, given
+* s = "leetcode",
+* dict = ["leet", "code"].
+*
+* Return true because "leetcode" can be segmented as "leet code".
+*
+* f[i] 表示前i个字符是否可以分。
+* 从前往后枚举结尾。对于每个结尾枚举分成的最后一段的长度j。然后看f[i-j]是否可分。
+*
+* initialize dp[s.length() + 1], dp[0] = true
+* dp function: dp[i] = dp[j] & (s[j, i] in dict)
+* result: dp[s.length()]
+ */
 public class LC139WordBreak {
 
     public boolean wordBreak(String s, List<String> dict) {

@@ -59,6 +59,7 @@ public class LC140WordBreakII {
             return results;
         }
 
+        // base case之一 当前字符串就是字典中的一个 先不分割 直接放入结果集
         if (dict.contains(s)) {
             results.add(s);
         }
@@ -66,14 +67,20 @@ public class LC140WordBreakII {
         // 上面已经检查过s本身是否存在于字典中 所以这里len只需要遍历到s.length()-1即可
         for (int len = 1; len < s.length(); len++) {
             String word = s.substring(0, len);
+            // 剪枝 如果前缀切出的word不在字典里 直接continue
             if (!dict.contains(word)) {
                 continue;
             }
 
-            //取出从[len, s.length()-1]这部分后缀字符串 进入下一层进行切割
+            /*
+            s此时右两部分组成："word + [len, s.length-1]"
+            取出[len, s.length()-1]这部分后缀字符串 进入下一层进行切割
+             */
             String suffix = s.substring(len);
+            // segments里面存的是以suffix为母串的所有合法切分组合
             List<String> segments = wordBreakHelper(suffix, dict, memo);
 
+            // 这里等于做一个笛卡尔并集操作
             for (String segment: segments){
                 results.add(word + " " + segment);
             }
