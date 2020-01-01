@@ -1,5 +1,11 @@
 package Stack;
 
+import Tree.TreeNode;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
 /**
  * Given two binary search trees root1 and root2.
  * Return a list containing all the integers from both trees sorted in ascending order.
@@ -29,5 +35,40 @@ package Stack;
  * Each node's value is between [-10^5, 10^5].
  */
 public class LC1305AllElementsInTwoBinarySearchTrees {
+
+    /*
+    模拟中序遍历 在遍历的过程中 比较两树当前最小值 取较小值放入结果集中 有点类似于merge sort中的merge操作
+     */
+    public List<Integer> getAllElements(TreeNode root1, TreeNode root2) {
+        Stack<TreeNode> s1 = new Stack<>();
+        Stack<TreeNode> s2 = new Stack<>();
+        getSmallest(root1, s1);
+        getSmallest(root2, s2);
+        List<Integer> result = new ArrayList<>();
+
+        Stack<TreeNode> curStack;
+        while (!s1.isEmpty() || !s2.isEmpty()) {
+            if (s1.isEmpty()) {
+                curStack = s2;
+            } else if (s2.isEmpty()) {
+                curStack = s1;
+            } else {
+                curStack = s1.peek().val < s2.peek().val ? s1 : s2;
+            }
+
+            TreeNode curNode = curStack.pop();
+            result.add(curNode.val);
+            // curNode 的左子树都已经遍历完了 把它的右子树节点压栈 然后往左走
+            getSmallest(curNode.right, curStack);
+        }
+        return result;
+    }
+
+    private void getSmallest(TreeNode root, Stack<TreeNode> stack) {
+        if (root == null) return;
+        stack.push(root);
+        // 越往左边数越小
+        getSmallest(root.left, stack);
+    }
 
 }

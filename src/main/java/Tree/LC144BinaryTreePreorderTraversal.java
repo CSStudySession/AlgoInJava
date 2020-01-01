@@ -66,16 +66,14 @@ public class LC144BinaryTreePreorderTraversal {
             return preorder;
         }
 
-        stack.push(root);
-        while (!stack.empty()) {
-            TreeNode node = stack.pop();
-            preorder.add(node.val);
-            // 由于stack先进后出的性质 所以这里先压右节点 再压左节点进栈
-            if (node.right != null) {
-                stack.push(node.right);
-            }
-            if (node.left != null) {
-                stack.push(node.left);
+        while (!stack.empty() || root != null) {
+            if (root != null) {
+                preorder.add(root.val);
+                stack.push(root);
+                root = root.left;
+            } else {
+                root = stack.pop();
+                root = root.right;
             }
         }
 
