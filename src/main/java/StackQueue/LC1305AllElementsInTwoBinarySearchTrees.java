@@ -1,4 +1,4 @@
-package Stack;
+package StackQueue;
 
 import Tree.TreeNode;
 
