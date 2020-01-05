@@ -30,6 +30,7 @@ public class LC227BasicCalculatorII {
             throw new IllegalArgumentException("invalid input");
         }
 
+        // 转化成char[]好运算 写起来方便
         char[] strArr = s.toCharArray();
         Stack<Integer> operands = new Stack<>();
         Stack<Character> operators = new Stack<>();
@@ -57,14 +58,17 @@ public class LC227BasicCalculatorII {
                         calc(operands, operators);
                     }
                 }
+                // 计算完之后再把当前运算符push到栈上
                 operators.push(strArr[i]);
             }
         }
 
+        // 清理栈中剩下的运算
         while (!operators.isEmpty()) {
             calc(operands, operators);
         }
 
+        // 最后的答案肯定存在operands栈上面
         return operands.pop();
     }
 
@@ -100,15 +104,3 @@ public class LC227BasicCalculatorII {
         System.out.println(".");
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-

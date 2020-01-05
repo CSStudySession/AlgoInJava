@@ -27,20 +27,24 @@ public class LC253MeetingRoomsII {
      */
     public int minMeetingRooms(int[][] intervals) {
         TreeMap<Integer, Integer> map = new TreeMap<>();
-        int ret = 0, cnt = 0;
-        for (int[] i : intervals) {
-            int start = i[0], end = i[1];
+        int ret = 0;
+        int cnt = 0;
+
+        for (int[] interval : intervals) {
+            int start = interval[0];
+            int end = interval[1];
             map.put(start, map.getOrDefault(start, 0) + 1);
             map.put(end, map.getOrDefault(end, 0) - 1);
         }
 
-        for (int k : map.keySet()) {
-            cnt += map.get(k);
+        for (int time : map.keySet()) {
+            cnt += map.get(time);
+            // 这里一定要用打擂台的方式更新答案
             ret = Math.max(ret, cnt);
         }
+
         return ret;
     }
-
 
     /*
      method 2: 排序

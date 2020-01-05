@@ -50,16 +50,17 @@ public class LC127WordLadder {
             int size = queue.size();
             for (int k = 0; k < size; k++) {
                 String frontStr = queue.poll();
+                // 看是否到达终点
+                if (frontStr.equals(endWord)) {
+                    return cnt;
+                }
+
                 for (int i = 0; i < frontStr.length(); i++) {
                     for (char c = 'a'; c <= 'z'; c++) {
-                        //把位置i的字符改成c 然后i+1到结尾接上去
+                        // 把位置i的字符改成c 然后i+1到结尾接上去
                         String cur = frontStr.substring(0, i) + c + frontStr.substring(i + 1);
-                        //要先与dict对照 如果cur不在dict里面 直接continue
+                        // 要先与dict对照 如果cur不在dict里面 直接continue
                         if (!dict.contains(cur) || visited.contains(cur)) continue;
-                        //过了dict对比后 再看是否已经到达终点
-                        if (endWord.equals(cur)) {
-                            return ++cnt; //这里要++cnt
-                        }
                         visited.add(cur);
                         queue.offer(cur);
                     }
@@ -68,6 +69,7 @@ public class LC127WordLadder {
             //for循环结束后 等于层序遍历的一层结束了 cnt子增  进入可能的下一层
             cnt++;
         }
+
         return 0;
     }
 
@@ -106,17 +108,18 @@ public class LC127WordLadder {
                 visited1 = setS;
             }
 
-            //先取出size!
+            // 先取出size!
             int size = queue0.size();
             for (int k = 0; k < size; k++) {
                 String front = queue0.poll();
+                if (visited1.contains(front)) {
+                    return cnt;
+                }
+
                 for (int i = 0; i < front.length(); i++) {
                     for (char c = 'a'; c <= 'z'; c++) {
                         if (c == front.charAt(i)) continue;
                         String nxt = front.substring(0,i) + c + front.substring(i+1);
-                        if (visited1.contains(nxt)) {
-                            return ++cnt;
-                        }
                         if (dict.contains(nxt) && !visited0.contains(nxt)) {
                             queue0.offer(nxt);
                             visited0.add(nxt);
@@ -129,8 +132,4 @@ public class LC127WordLadder {
         }
         return 0;
     }
-
-
-
-
 }

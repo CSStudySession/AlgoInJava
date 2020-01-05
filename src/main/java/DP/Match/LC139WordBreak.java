@@ -34,11 +34,10 @@ public class LC139WordBreak {
 
         canSegment[0] = true; //空字符串默认可以匹配
         for (int i = 1; i <= s.length(); i++) {
-            canSegment[i] = false;
             // maxLength用来剪枝 注意j,i都是长度(位数) 不是index!
-            for (int j = 1; j < maxLength && j < i; j++) {
+            for (int j = 1; j < maxLength && j <= i; j++) {
                 if (!canSegment[i-j]) continue;
-                String str = s.substring(j,i);
+                String str = s.substring(i-j,i);
                 if (set.contains(str)) {
                     canSegment[i] = true;
                     break;

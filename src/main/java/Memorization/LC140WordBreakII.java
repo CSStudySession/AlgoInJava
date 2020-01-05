@@ -73,7 +73,7 @@ public class LC140WordBreakII {
             }
 
             /*
-            s此时右两部分组成："word + [len, s.length-1]"
+            s此时由两部分组成："word + [len, s.length-1]"
             取出[len, s.length()-1]这部分后缀字符串 进入下一层进行切割
              */
             String suffix = s.substring(len);

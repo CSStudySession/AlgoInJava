@@ -36,50 +36,48 @@ import java.util.*;
  * randomSet.getRandom();
  */
 public class LC380RandomizedSet {
-    Map<Integer, Integer> map;
-    List<Integer> list;
-    int size;
+    // 起有意义的变量名
+    Map<Integer, Integer> numToIndex;
+    List<Integer> nums;
 
     /** Initialize your data structure here. */
     public LC380RandomizedSet() {
-        map = new HashMap<>();
-        list = new ArrayList<>();
-        size = 0;
+        numToIndex = new HashMap<>();
+        nums = new ArrayList<>();
     }
 
     /** Inserts a value to the set. Returns true if the set did not already contain the specified element. */
     public boolean insert(int val) {
-        if (map.containsKey(val)) return false;
+        if (numToIndex.containsKey(val)) return false;
 
-        if (list.size() == size) {
-           list.add(val);
-        } else {
-            list.set(size, val);
-        }
-
-        map.put(val, size);
-        size++;
+        numToIndex.put(val, nums.size());
+        nums.add(val);
         return true;
     }
 
     /** Removes a value from the set. Returns true if the set contained the specified element. */
     public boolean remove(int val) {
-        if (!map.containsKey(val)) return false;
-        int idx = map.get(val);
-        int tmp = list.get(size - 1);
-        list.set(idx, tmp);
-        list.set(size - 1, null);
-        map.remove(val);
-        size--;
+        if (!numToIndex.containsKey(val)) return false;
+
+        // 待删除元素的下标与last index比较 如果一样 直接在尾巴删除 如果不一样 置换后删除最后一个
+        int index =  numToIndex.get(val);
+        if (index < nums.size() - 1) {
+            int lastItem = nums.get(nums.size() - 1);
+            nums.set(index, lastItem);
+            numToIndex.put(lastItem, index);
+        }
+
+        numToIndex.remove(val);
+        nums.remove(nums.size() - 1);
         return true;
     }
 
     /** Get a random element from the set. */
     public int getRandom() {
-        if (size == 0) return -1;
+        if (nums.size() == 0) return -1;
         Random random = new Random();
-        int idx = random.nextInt(size);
-        return list.get(idx);
+        int index = random.nextInt(nums.size());
+        return nums.get(index);
     }
 
     public static void main(String[] args) {

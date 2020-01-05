@@ -48,7 +48,7 @@ public class LC124BinaryTreeMaximumPathSum {
         if (root == null) {
             return 0;
         }
-        List<Integer> res = new ArrayList<Integer>();
+        List<Integer> res = new ArrayList<>();
         res.add(Integer.MIN_VALUE);
         helper(root, res);
         return res.get(0);

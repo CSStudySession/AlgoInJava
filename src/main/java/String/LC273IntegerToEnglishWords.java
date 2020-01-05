@@ -1,22 +1,22 @@
 package String;
 
 /**
- * Convert a non-negative integer to its english words representation. Given input is guaranteed to be less than 231 - 1.
+ * Convert a non-negative integer to its english words representation.
+ * Given input is guaranteed to be less than 2^31 - 1.
  *
  * Example 1:
- *
  * Input: 123
  * Output: "One Hundred Twenty Three"
- * Example 2:
  *
+ * Example 2:
  * Input: 12345
  * Output: "Twelve Thousand Three Hundred Forty Five"
- * Example 3:
  *
+ * Example 3:
  * Input: 1234567
  * Output: "One Million Two Hundred Thirty Four Thousand Five Hundred Sixty Seven"
- * Example 4:
  *
+ * Example 4:
  * Input: 1234567891
  * Output: "One Billion Two Hundred Thirty Four Million Five Hundred Sixty Seven Thousand Eight Hundred Ninety One"
  *
@@ -42,12 +42,13 @@ public class LC273IntegerToEnglishWords {
         String words = "";
 
         while (num > 0) {
-            // 每三位读一次 注意间隔处需要加入空格
+            // 每三位读一次 注意word之间加空格
             if (num % 1000 != 0) {
                 words = helper(num % 1000) + THOUSANDS[i] + " " + words;
             }
-            // 最尾三位已经读完 舍弃后三位
+            // last three bits are already be read, so throw them away
             num /= 1000;
+            // move to next level
             i++;
         }
 
@@ -55,14 +56,15 @@ public class LC273IntegerToEnglishWords {
     }
 
     private String helper(int num) {
-        if (num == 0)
+        if (num == 0) {
             return "";
-        else if (num < 20)
+        } else if (num < 20) {
             return LESS_THAN_20[num] + " ";
-        else if (num < 100)
-            return TENS[num / 10] + " " + helper(num % 10);
-        else
+        } else if  (num < 100) {
+            return TENS[num / 10] + " "  + helper(num % 10);
+        } else {
             return LESS_THAN_20[num / 100] + " Hundred " + helper(num % 100);
+        }
     }
 
 }

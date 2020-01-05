@@ -7,6 +7,15 @@ import java.util.Queue;
  * Do not use class member/global/static variables to store states.
  * Your serialize and deserialize algorithms should be stateless.
  *
+ * Example:
+ * You may serialize the following tree:
+ *     1
+ *    / \
+ *   2   3
+ *      / \
+ *     4   5
+ * as "[1,2,3,null,null,4,5]"
+ *
  */
 public class LC297SerializeAndDeserializeBinaryTree {
 
@@ -54,7 +63,7 @@ public class LC297SerializeAndDeserializeBinaryTree {
     }
 
 
-    // Encodes a tree to a single string using preoder traversal
+    // Encodes a tree to a single string using pre-order traversal
     public String serialize2(TreeNode root) {
         if (root == null) return "null";
         StringBuilder sb = new StringBuilder();
@@ -68,9 +77,9 @@ public class LC297SerializeAndDeserializeBinaryTree {
         return sb.toString();
     }
 
-    // Decodes your encoded data to tree.
+    // Decodes encoded data to tree.
     public TreeNode deserialize2(String data) {
-        Queue<String> queue = new LinkedList<String>();
+        Queue<String> queue = new LinkedList<>();
         String[] nodes = data.split(",");
         for (String node : nodes) {
             queue.offer(node);
@@ -82,7 +91,7 @@ public class LC297SerializeAndDeserializeBinaryTree {
         if (queue == null || queue.size() == 0) return null;
         String cur = queue.poll();
         if (cur.equals("null")) return null;
-        TreeNode root = new TreeNode(Integer.parseInt(cur));
+        TreeNode root = new TreeNode(Integer.valueOf(cur));
         root.left = treeConstructor(queue);
         root.right = treeConstructor(queue);
         return root;

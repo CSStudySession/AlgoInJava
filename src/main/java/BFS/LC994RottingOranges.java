@@ -60,7 +60,7 @@ public class LC994RottingOranges {
         //bfs starting from initially rotten oranges
         while(!queue.isEmpty()) {
             int size = queue.size();
-            for(int i = 0 ; i < size ; i++) {
+            for(int i = 0 ; i < size; i++) {
                 int[] point = queue.poll();
                 for(int dir[] : dirs) {
                     int x = point[0] + dir[0];

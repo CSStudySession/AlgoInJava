@@ -62,6 +62,15 @@ public class LC381RandomizedCollection {
     /** Removes a value from the collection. Returns true if the collection contained the specified element. */
     public boolean remove(int val) {
         if (!valToIdx.containsKey(val)) return false;
+
+        /*
+        1. valIndx: 待删元素在数组最后一次出现的下标
+        2. 因为要删掉vaIndx指向的元素 所以把数组最后一个元素 直接覆盖到valIndx上即可
+        3. 数组删掉最后一个元素 此时该元素已经挪动到坐标valIndx上
+        4. 修改curLastItem下标的指向地址为valIndx
+        5. 删除val元素下标集合的最后一个元素
+        6. 如果val元素下标集合空了 直接删除整条记录
+         */
         int valIndx = valToIdx.get(val).get(valToIdx.get(val).size() - 1);
         Item curLastItem = items.get(items.size() - 1);
         items.set(valIndx, curLastItem);
@@ -84,6 +93,12 @@ public class LC381RandomizedCollection {
 
     public class Item {
         int val;
+        /*
+         在相同val的map entry中对应的下标
+         比如: 3: {3, 5}
+         item{3,0}
+         3在数组位置的{3,5} 当前item的值是3 是3对应列表的第一个元素
+         */
         int idx;
         public Item() {}
 
