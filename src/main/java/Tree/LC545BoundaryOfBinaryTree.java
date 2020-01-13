@@ -59,7 +59,7 @@ import java.util.List;
  */
 public class LC545BoundaryOfBinaryTree {
 
-    private List<Integer> ans = new ArrayList<Integer>();
+    private List<Integer> ans = new ArrayList<>();
 
     /**
      * @param root: a TreeNode

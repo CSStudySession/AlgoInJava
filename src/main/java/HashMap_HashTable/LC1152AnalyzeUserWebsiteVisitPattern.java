@@ -53,9 +53,9 @@ public class LC1152AnalyzeUserWebsiteVisitPattern {
         int max = Integer.MIN_VALUE;
         String ans = "";
         // <三元组, 出现次数>
-        HashMap<String,Integer> patternToFreq = new HashMap<>();
+        HashMap<String, Integer> patternToFreq = new HashMap<>();
         for(String user : map.keySet()) {
-            TreeMap<Integer,String> timeStampToWeb = map.get(user);
+            TreeMap<Integer, String> timeStampToWeb = map.get(user);
             HashSet<String> set = new HashSet<>();
             // list of websites for a user
             List<String> temp = new ArrayList<>();

@@ -73,7 +73,7 @@ public class LC99RecoverBinarySearchTree {
         inorderTraversal(root.right, candidates);
     }
 
-    // version 2: iterative
+    // version 2: iterative 中根遍历+访问节点时做比较
     public void recoverTree2(TreeNode root) {
         Stack<TreeNode> stack = new Stack<>();
         TreeNode prev = null;

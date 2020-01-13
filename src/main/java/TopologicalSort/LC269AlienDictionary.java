@@ -71,7 +71,7 @@ public class LC269AlienDictionary {
         }
 
         // create edges
-        for (int i = 0; i <  words.length - 1; i++) {
+        for (int i = 0; i < words.length - 1; i++) {
             int index = 0;
             while (index < words[i].length() && index < words[i + 1].length()) {
                 if (words[i].charAt(index) != words[i + 1].charAt(index)) {
@@ -127,6 +127,7 @@ public class LC269AlienDictionary {
         if (sb.length() != indegree.size()) {
             return "";
         }
+
         return sb.toString();
     }
 

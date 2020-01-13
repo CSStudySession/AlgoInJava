@@ -26,7 +26,7 @@ package StackQueue;
 public class LC239SlidingWindowMaximum {
 
     public int[] maxSlidingWindow(int[] nums, int k) {
-
+        return null;
     }
 
 }
