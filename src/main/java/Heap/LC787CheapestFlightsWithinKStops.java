@@ -1,0 +1,89 @@
+package Heap;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Queue;
+
+/**
+ * There are n cities connected by m flights. Each fight starts from city u and arrives at v with a price w.
+ *
+ * Now given all the cities and flights, together with starting city src and the destination dst,
+ * your task is to find the cheapest price from src to dst with up to k stops. If there is no such route, output -1.
+ *
+ * Example 1:
+ * Input:
+ * n = 3, edges = [[0,1,100],[1,2,100],[0,2,500]]
+ * src = 0, dst = 2, k = 1
+ * Output: 200
+ * The cheapest price from city 0 to city 2 with at most 1 stop costs 200, as marked red in the picture.
+ *
+ * Example 2:
+ * Input:
+ * n = 3, edges = [[0,1,100],[1,2,100],[0,2,500]]
+ * src = 0, dst = 2, k = 0
+ * Output: 500
+ * Explanation:
+ * The cheapest price from city 0 to city 2 with at most 0 stop costs 500, as marked blue in the picture.
+ *
+ * Note:
+ *
+ * The number of nodes n will be in range [1, 100], with nodes labeled from 0 to n - 1.
+ * The size of flights will be in range [0, n * (n - 1) / 2].
+ * The format of each flight will be (src, dst, price).
+ * The price of each flight will be in the range [1, 10000].
+ * k is in the range of [0, n - 1].
+ * There will not be any duplicated flights or self cycles.
+ *
+ * 思路:
+ * 1. put all flights into a prices map -> Map<Integer, Map<Integer, Integer>>
+ *  // source city : Map<destination city, price>
+ * 2. init a min pq -> each object in pq should be an int array with
+ * top[0] = current total price
+ * top[1] = current source city
+ * top[2] = max distance to destination allowed
+ * pq compares each object by total price so far
+ * 3. add original source city to pq with price = 0 & distance allowed = k + 1
+ * 4. while exists cities to explore
+ * --> get min object then remove it from pq
+ * --> get current total price, current source city & distance to destination allowed from min object
+ * --> if current source == destination
+ * (obviously distance from original source to current source [which is destination] is less than k) -> return current total price
+ * else find (from prices map) all connected flights that fly from current source + calculate new price,
+ * new current source & new distance + add them to pq
+ *
+ * If no city left to explore and no flight that fits criteria found till now, return -1
+ */
+public class LC787CheapestFlightsWithinKStops {
+
+    public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
+        Map<Integer, Map<Integer, Integer>> prices = new HashMap<>();
+        for (int[] f : flights) {
+            if (!prices.containsKey(f[0])) prices.put(f[0], new HashMap<>());
+            prices.get(f[0]).put(f[1], f[2]);
+        }
+
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> (Integer.compare(a[0], b[0])));
+        // 初始化 src到自己价格是0 1
+        pq.add(new int[] {0, src, k + 1});
+
+        while (!pq.isEmpty()) {
+            int[] top = pq.poll();
+            int price = top[0];
+            int city = top[1];
+            int stops = top[2];
+            if (city == dst) return price;
+
+            if (stops > 0) {
+                // 拿出当前city的所有出边 然后进行状态拓展
+                Map<Integer, Integer> adj = prices.getOrDefault(city, new HashMap<>());
+                for (int nextCity : adj.keySet()) {
+                    pq.add(new int[] {price + adj.get(nextCity), nextCity, stops - 1});
+                }
+            }
+        }
+
+        return -1;
+    }
+
+}

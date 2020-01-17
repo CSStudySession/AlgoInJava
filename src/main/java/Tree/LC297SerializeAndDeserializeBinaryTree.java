@@ -68,8 +68,8 @@ public class LC297SerializeAndDeserializeBinaryTree {
         if (root == null) return "null";
         StringBuilder sb = new StringBuilder();
         sb.append(root.val);
-        String left = serialize(root.left);
-        String right = serialize(root.right);
+        String left = serialize2(root.left);
+        String right = serialize2(root.right);
         sb.append(",");
         sb.append(left);
         sb.append(",");

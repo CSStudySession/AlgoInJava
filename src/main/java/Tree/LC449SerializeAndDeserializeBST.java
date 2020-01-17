@@ -36,7 +36,7 @@ public class LC449SerializeAndDeserializeBST {
         while (!st.empty()) {
             root = st.pop();
             sb.append(root.val).append(SEP);
-            //stackfirst in, last out. 所以入栈顺序与先根遍历相反
+            //stack first in, last out. 所以入栈顺序与先根遍历相反
             if (root.right != null) st.push(root.right);
             if (root.left != null) st.push(root.left);
         }

@@ -1,4 +1,4 @@
-package Sort;
+package Sort_OrderedMap;
 
 import java.util.Arrays;
 import java.util.TreeMap;

@@ -1,5 +1,8 @@
 package StackQueue;
 
+import java.util.Deque;
+import java.util.LinkedList;
+
 /**
  * Given an array nums, there is a sliding window of size k which is moving
  * from the very left of the array to the very right. You can only see the k numbers in the window.
@@ -26,7 +29,36 @@ package StackQueue;
 public class LC239SlidingWindowMaximum {
 
     public int[] maxSlidingWindow(int[] nums, int k) {
-        return null;
+        if (nums == null || nums.length == 0) return new int[]{};
+        Deque<Integer> deque = new LinkedList<>();
+        int[] res = new int[nums.length - k + 1];
+
+        for (int i = 0; i < k - 1; i++) {
+            inQueue(nums, deque, i);
+        }
+
+        int pos = 0;
+        for (int i = k - 1; i < nums.length; i++) {
+            inQueue(nums, deque, i);
+            // 注意这里是入队元素 nums[xxx]
+            res[pos++] = nums[deque.peekFirst()];
+            outQueue(nums, deque, i - k + 1);
+        }
+
+        return res;
+    }
+
+    private void outQueue(int[] nums, Deque<Integer> deque, int index) {
+        while (!deque.isEmpty() && deque.peekFirst() <= index) {
+            deque.pollFirst();
+        }
+    }
+
+    private void inQueue(int[] nums, Deque<Integer> deque, int index) {
+        while (!deque.isEmpty() && nums[deque.peekLast()] <= nums[index]) {
+            deque.pollLast();
+        }
+        deque.offer(index);
     }
 
 }

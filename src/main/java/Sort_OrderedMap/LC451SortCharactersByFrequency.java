@@ -1,4 +1,4 @@
-package Sort;
+package Sort_OrderedMap;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -37,10 +37,17 @@ public class LC528RandomPickWithWeight {
         wSums = new int[w.length + 1];
 
         for (int i = 1; i <= w.length; i++) {
-            wSums[i] = wSums[i-1] + w[i - 1];
+            wSums[i] = wSums[i - 1] + w[i - 1];
         }
     }
 
+    /*
+    二分答案 这里的答案区间就是概率分布的区间:[1, wSum[len-1]]
+    然后随机出一个在答案区间的数 看它离那个坐标最近
+    注意这里可能会有个followup:如果输入w数组中 会有0 怎么办？
+    有0 -> 前缀和数组wSums会出现重复数 此时我们应该选择重复数的第一个
+    故搜到wSums[mid] == idx 时 往回找看w[mid-1]是否为0 如果是 right = mid 接着搜
+     */
     public int pickIndex() {
         int len = wSums.length;
         int idx = random.nextInt(wSums[len-1]) + 1;

@@ -34,7 +34,7 @@ public class shortestCycleIncludesTargetNode {
                         }
                         return result;
                     } else {
-                        if (visited[next] == true) continue;
+                        if (visited[next]) continue;
                         visited[next] = true;
                         parent[next] = curNode;
                         queue.offer(next);
@@ -42,6 +42,7 @@ public class shortestCycleIncludesTargetNode {
                 }
             }
         }
+
         return result;
     }
 

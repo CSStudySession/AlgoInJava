@@ -60,15 +60,18 @@ public class LC388LongestAbsoluteFilePath {
         Map<Integer, Integer> depthHash = new HashMap<>();
         depthHash.put(0,0);
         int result = 0;
-        for (String s : list) {
+
+        for (String str : list) {
             //多个\t的情况 跳过前面的多个
-            int d = s.lastIndexOf("\t") + 1;
-            int len = s.substring(d).length();
-            if(s.contains(".")) {
-                int dirLen = depthHash.get(d);
+            int depth = str.lastIndexOf("\t") + 1;
+            int len = str.substring(depth).length();
+            // 遇到 '.' 证明是个文件 可以更新答案 但不能更新depthHash
+            if (str.contains(".")) {
+                int dirLen = depthHash.get(depth);
                 result = Math.max(result, dirLen + len);
-            }else{
-                depthHash.put(d+1, depthHash.get(d) + len +1); // 1 for /
+            } else {
+                // len + 1 -> +1 for '/'
+                depthHash.put(depth + 1, depthHash.get(depth) + len + 1);
             }
         }
         return result;

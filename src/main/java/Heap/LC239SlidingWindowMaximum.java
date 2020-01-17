@@ -36,7 +36,7 @@ public class LC239SlidingWindowMaximum {
 
     思路：heap
     维护一个大小为k的treeSet,依次将原数组数据入堆,每次堆顶的元素即为窗口中的最大值.
-    注意当k == nums.length的情况：当pq.sise() == k时就要更新结果数组
+    注意当k == nums.length的情况：当pq.size() == k时就要更新结果数组
      */
     public int[] maxSlidingWindow(int[] nums, int k) {
         if (nums == null || nums.length == 0) return new int[]{};
@@ -65,35 +65,4 @@ public class LC239SlidingWindowMaximum {
         }
     }
 
-
-    /*
-    复杂度
-    时间:O(n) 空间:O(k)
-
-    思路：Deque
-    维护一个双向队列,队列里面存原数组元素的下标,下标对应的元素在队列从头到尾递减顺序排列,
-    这样每次队头的元素即为窗口中的最大值.每次加入新下标时,先判断是否能入队的条件,如果不能,就先从队尾出队到
-    条件满足为止.
-     */
-    public int[] maxSlidingWindow2(int[] nums, int k) {
-        if (nums == null || nums.length == 0) return new int[]{};
-        Deque<Integer> deque = new LinkedList<Integer>();
-        int[] res = new int[nums.length-k+1];
-        for (int i = 0; i < nums.length; i++) {
-            // 每次将不属于当前窗口的元素都移除
-            while (!deque.isEmpty() && deque.peek() < i - k + 1) {
-                deque.poll();
-            }
-            // 队尾的元素必须比目前元素大,否则就一直出队到满足条件
-            while (!deque.isEmpty() && nums[deque.peekLast()] < nums[i]) {
-                deque.removeLast();
-            }
-            deque.offerLast(i);
-
-            if (i+1 >= k) {
-                res[i+1-k] = nums[deque.peek()];
-            }
-        }
-        return res;
-    }
 }
