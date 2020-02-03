@@ -28,7 +28,7 @@ public class LC297SerializeAndDeserializeBinaryTree {
         StringBuilder sb = new StringBuilder();
         while (!queue.isEmpty()) {
             TreeNode node = queue.poll();
-            if (node!= null) {
+            if (node != null) {
                 queue.offer(node.left);
                 queue.offer(node.right);
                 sb.append(node.val + ",");
@@ -37,11 +37,10 @@ public class LC297SerializeAndDeserializeBinaryTree {
             }
         }
         //删掉最后一个","
-        if (sb.length() != 0) sb.deleteCharAt(sb.length()-1);
+        if (sb.length() != 0) sb.deleteCharAt(sb.length() - 1);
         return sb.toString();
     }
 
-    // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
         TreeNode head = null;
         if (data == null || data.length() == 0) return head;
@@ -52,6 +51,10 @@ public class LC297SerializeAndDeserializeBinaryTree {
                 treeNodes[i] = new TreeNode(Integer.valueOf(nodes[i]));
             }
         }
+
+        /*
+        用 k and j 两个指针去重构二叉树 注意循环中break和continue的条件
+         */
         int k = 1;
         for (int j = 0; j < treeNodes.length; j++) {
             if (k == treeNodes.length) break;

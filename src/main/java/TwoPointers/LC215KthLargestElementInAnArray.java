@@ -67,11 +67,11 @@ public class LC215KthLargestElementInAnArray {
 
     public static void main(String[] args) {
         LC215KthLargestElementInAnArray inst = new LC215KthLargestElementInAnArray();
-        int[] nums = {99,99};
-        int k = 1;
-        inst.findKthLargest(nums, k);
+        int[] nums = {50, 43, 63, 97, 30, 89, 89, 94, 30, 33};
+        int k = 10;
+        int res = inst.findKthLargest(nums, k);
 
-        System.out.println(".");
+        System.out.println(res);
     }
 
 }

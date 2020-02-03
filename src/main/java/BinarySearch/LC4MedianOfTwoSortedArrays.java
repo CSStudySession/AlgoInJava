@@ -18,6 +18,7 @@ package BinarySearch;
  */
 public class LC4MedianOfTwoSortedArrays {
 
+    // version 1: 二分分割位置
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         if ((nums1 == null && nums2 == null) || (nums1.length == 0 && nums2.length == 0)) return 0.0;
 
@@ -82,6 +83,68 @@ public class LC4MedianOfTwoSortedArrays {
             }
         }
         return 0.0;
+    }
+
+
+    // version 2: 每次扔掉k/2个数
+    public double findMedianSortedArraysV2(int A[], int B[]) {
+        int n = A.length + B.length;
+
+        if (n % 2 == 0) {
+            return (
+                    findKth(A, 0, B, 0, n / 2) +
+                            findKth(A, 0, B, 0, n / 2 + 1)
+            ) / 2.0;
+        }
+
+        return findKth(A, 0, B, 0, n / 2 + 1);
+    }
+
+    // find kth number of two sorted array
+    public static int findKth(int[] A, int startOfA,
+                              int[] B, int startOfB,
+                              int k) {
+        // 下面所有的下标都要减一：第k个数下标为k-1
+        // 某个数组的数都扔完了 直接返回对面数组的第start + k - 1个位置的数即可
+        if (startOfA >= A.length) {
+            return B[startOfB + k - 1];
+        }
+
+        if (startOfB >= B.length) {
+            return A[startOfA + k - 1];
+        }
+
+        // 只剩一个数待检查 直接返回A,B数组里面小的那个即可
+        // 这里不用查下标越界的原因是 上面两个if已经确保下标都合法了
+        if (k == 1) {
+            return Math.min(A[startOfA], B[startOfB]);
+        }
+
+        /*
+        下面的两个比较 比较的是A和B的start + k/2 - 1的位置哪个数字小 谁小就把谁的前k/2个数字扔掉
+        因为这k/2个数肯定不会包含结果 
+
+        从start开始的第k/2个数的下标为 start + k/2 - 1
+        如果start + k/2 - 1 为什么返回正最大？-> 把扔掉数字的机会给对面的数组
+        比如: A有2个数 B有101个数 中位数是两数组合并后第52个数 每次应该从A或者B里面挑
+        52/2 = 26个数字扔掉 但是A没有这么多数可以扔 那就扔B的26个数就可以 为什么可以这么做？
+        因为求的是第52个数字 B扔掉26个 也不会扔掉可能的结果 所以当一个数组数字不够需要扔的数时
+        选择扔对面的数组即可 会不会出现都不够的情况？不会 因为k是合法的 在都不够扔之前肯定就找到
+        第k个数了
+         */
+        int halfKthOfA = startOfA + k / 2 - 1 < A.length
+                ? A[startOfA + k / 2 - 1]
+                : Integer.MAX_VALUE;
+        int halfKthOfB = startOfB + k / 2 - 1 < B.length
+                ? B[startOfB + k / 2 - 1]
+                : Integer.MAX_VALUE;
+
+        // 扔掉A从start开始的k/2个数 下一次A的起点变成A + start / 2 扔掉了k/2个 还剩k - k/2个数待检查
+        if (halfKthOfA < halfKthOfB) {
+            return findKth(A, startOfA + k / 2, B, startOfB, k - k / 2);
+        } else {
+            return findKth(A, startOfA, B, startOfB + k / 2, k - k / 2);
+        }
     }
 
 }
