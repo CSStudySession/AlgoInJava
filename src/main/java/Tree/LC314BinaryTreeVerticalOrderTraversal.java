@@ -94,12 +94,12 @@ public class LC314BinaryTreeVerticalOrderTraversal {
             //左右子节点和相应的列数分别入队
             if (curNode.left != null) {
                 queue.offer(curNode.left);
-                column.offer(curIdx-1);
+                column.offer(curIdx - 1);
             }
 
             if (curNode.right != null) {
                 queue.offer(curNode.right);
-                column.offer(curIdx+1);
+                column.offer(curIdx + 1);
             }
         }
 

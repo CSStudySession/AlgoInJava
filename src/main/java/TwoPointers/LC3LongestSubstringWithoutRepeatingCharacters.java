@@ -33,16 +33,13 @@ public class LC3LongestSubstringWithoutRepeatingCharacters {
 
         for (int i = 0, j = 0; i < s.length(); i++) {
             while (j < s.length()) {
-                if (!charSet.contains(s.charAt(j))) {
-                    charSet.add(s.charAt(j));
-                    j++;
-                } else {
-                    break;
-                }
+                if (charSet.contains(s.charAt(j))) break;
+                charSet.add(s.charAt(j));
+                j++;
             }
+
             result = Math.max(result, j - i);
             if (j == s.length()) break;
-
             charSet.remove(s.charAt(i));
         }
 

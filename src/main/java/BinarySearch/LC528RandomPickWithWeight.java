@@ -52,7 +52,7 @@ public class LC528RandomPickWithWeight {
         int len = wSums.length;
         int idx = random.nextInt(wSums[len-1]) + 1;
         // 注意: 前缀和数组下标跟原数组下表差了1 所以返回值要减掉1
-        int left = 0, right = len - 1;
+        int left = 1, right = len - 1;
         // 二分模板之一：left + 1, right, left + (right - left) / 2
         while (left < right) {
             int mid = left + (right - left) / 2;

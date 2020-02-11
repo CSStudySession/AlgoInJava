@@ -60,7 +60,7 @@ public class LC311SparseMatrixMultiplication {
                     // 用 "i j"作为key
                     String curr = A.get(i).get(0) + " " + B.get(j).get(1);
                     // C[i][j] += A[i][k] * B[k][j]
-                    map.put(curr, map.getOrDefault(curr, 0) + A.get(i).get(2)*B.get(j).get(2));
+                    map.put(curr, map.getOrDefault(curr, 0) + A.get(i).get(2) * B.get(j).get(2));
                 }
             }
         }
