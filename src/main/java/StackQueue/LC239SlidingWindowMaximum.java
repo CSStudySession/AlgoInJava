@@ -42,13 +42,13 @@ public class LC239SlidingWindowMaximum {
             inQueue(nums, deque, i);
             // 注意这里是入队元素 nums[xxx]
             res[pos++] = nums[deque.peekFirst()];
-            outQueue(nums, deque, i - k + 1);
+            outQueue(deque, i - k + 1);
         }
 
         return res;
     }
 
-    private void outQueue(int[] nums, Deque<Integer> deque, int index) {
+    private void outQueue(Deque<Integer> deque, int index) {
         while (!deque.isEmpty() && deque.peekFirst() <= index) {
             deque.pollFirst();
         }

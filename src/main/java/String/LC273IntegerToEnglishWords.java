@@ -21,7 +21,7 @@ package String;
  * Output: "One Billion Two Hundred Thirty Four Million Five Hundred Sixty Seven Thousand Eight Hundred Ninety One"
  *
  * 思路：从低位到高位 三个一组去读
- * 题目中限定了输入数字范围为[0,2^31 - 1]之间，最高只能到billion位 3个一组也只需处理四组即可
+ * 题目中限定了输入数字范围为[0, 2^31 - 1]之间，最高只能到billion位 3个一组也只需处理四组即可
  */
 public class LC273IntegerToEnglishWords {
 
@@ -39,12 +39,12 @@ public class LC273IntegerToEnglishWords {
         if (num == 0) return "Zero";
 
         int i = 0;
-        String words = "";
+        StringBuilder words = new StringBuilder();
 
         while (num > 0) {
-            // 每三位读一次 注意word之间加空格
+            // 每三位读一次 注意word之间加空格->每次append一个" "
             if (num % 1000 != 0) {
-                words = helper(num % 1000) + THOUSANDS[i] + " " + words;
+                words.insert(0,helper(num % 1000) + THOUSANDS[i] + " ");
             }
             // last three bits are already be read, so throw them away
             num /= 1000;
@@ -52,7 +52,7 @@ public class LC273IntegerToEnglishWords {
             i++;
         }
 
-        return words.trim();
+        return words.toString().trim();
     }
 
     private String helper(int num) {

@@ -57,7 +57,7 @@ public class LC301RemoveInvalidParentheses {
             String strNxt = str.substring(0, i) + str.substring(i+1);
             // 先删除多余的右括号 因为右括号多肯定不合法
             if (right > 0 && str.charAt(i) == ')') {
-                dfs(strNxt, i, left, right- 1, result);
+                dfs(strNxt, i, left, right - 1, result);
             } else if (left > 0 && str.charAt(i) == '(') {
                 // 右括号处理完了 处理左括号
                 dfs(strNxt, i, left - 1, right, result);
@@ -73,6 +73,7 @@ public class LC301RemoveInvalidParentheses {
             if (str.charAt(k) == ')') cnt--;
             if (cnt < 0) return false;
         }
+
         return cnt == 0;
     }
 }

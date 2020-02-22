@@ -1,6 +1,6 @@
-package Heap;
+package Sort_OrderedMap;
 
-import java.util.PriorityQueue;
+import java.util.Arrays;
 
 /**
  * We have a list of points on the plane.
@@ -26,25 +26,43 @@ import java.util.PriorityQueue;
  * 1 <= K <= points.length <= 10000
  * -10000 < points[i][0] < 10000
  * -10000 < points[i][1] < 10000
+ *
+ * 思路:quick select
  */
 public class LC973KClosestPointsToOrigin {
 
     public int[][] kClosest(int[][] points, int K) {
-        PriorityQueue<int[]> pq = new PriorityQueue<>(K + 1,
-                (int[] cord1, int[] cord2) ->
-                        ((cord2[0]*cord2[0] + cord2[1]*cord2[1]) - (cord1[0]*cord1[0] + cord1[1]*cord1[1])));
+        int len =  points.length, l = 0, r = len - 1;
+        while (l <= r) {
+            int index = helper(points, l, r);
+            if (index == K) break;
+            if (index < K) {
+                l = index + 1;
+            } else {
+                r = index - 1;
+            }
+        }
+        // copyOfRange左闭右开
+        return Arrays.copyOfRange(points, 0, K);
+    }
 
-        for (int i = 0; i < points.length; i++) {
-            pq.offer(points[i]);
-            if (pq.size() > K) pq.poll();
+    private int helper(int[][] A, int l, int r) {
+        int[] pivot = A[l];
+        // 每次找到一个不满足的点 都要跟对面互换
+        while (l < r) {
+            while (l < r && compare(A[r], pivot) >= 0) r--;
+            A[l] = A[r];
+            while (l < r && compare(A[l], pivot) <= 0) l++;
+            A[r] = A[l];
         }
 
-        int[][] ret = new int[K][2];
-        for (int j = 0; j < K; j++) {
-            ret[j] = pq.poll();
-        }
+        // 最后l or r跟pivot换 while循环break时 l==r
+        A[r] = pivot;
+        return r;
+    }
 
-        return ret;
+    private int compare(int[] p1, int[] p2) {
+        return p1[0] * p1[0] + p1[1] * p1[1] - p2[0] * p2[0] - p2[1] * p2[1];
     }
 
 }

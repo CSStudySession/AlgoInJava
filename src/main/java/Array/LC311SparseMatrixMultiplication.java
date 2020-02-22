@@ -31,6 +31,8 @@ import java.util.Map;
  *
  * followup:自定义数据结构去做.
  * 由于是稀疏矩阵 所以很多entries是0 直接存不为零的entries然后遍历中判断是否可以做乘法即可
+ *
+ * 矩阵相乘的条件: A * B -> A的列数==B的行数
  */
 public class LC311SparseMatrixMultiplication {
 

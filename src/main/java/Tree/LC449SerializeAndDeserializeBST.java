@@ -8,7 +8,7 @@ import java.util.Stack;
  * Design an algorithm to serialize and deserialize a binary search tree.
  * There is no restriction on how your serialization/deserialization algorithm should work.
  * You just need to ensure that a binary search tree can be serialized to
- * a string and this string can be deserialized to the original tree structure.
+ * a string and this string can be de-serialized to the original tree structure.
  *
  * The encoded string should be as compact as possible.
  *
@@ -18,7 +18,7 @@ import java.util.Stack;
  * 思路:
  * 利用bst的性质 在序列化的过程中 可以不保存null节点了
  * 反序列化过程中 每次维护两个队列 一个全局节点队列 一个小于当前节点值的队列
- * 小于当前节点值得队列里存储比当前节点小的节点值
+ * 小于当前节点值的队列里存储比当前节点小的节点值
  * 自底向上递归去反序列化二叉树
  * worst case time complexity should be O(N^2), when the tree is really unbalanced
  */
