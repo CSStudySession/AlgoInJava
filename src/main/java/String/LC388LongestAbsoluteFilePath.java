@@ -58,22 +58,24 @@ public class LC388LongestAbsoluteFilePath {
     public int lengthLongestPath(String input) {
         String[] list = input.split("\n");
         Map<Integer, Integer> depthHash = new HashMap<>();
-        depthHash.put(0,0);
+        depthHash.put(0, 0); // 第0层啥都没有
         int result = 0;
 
         for (String str : list) {
-            //多个\t的情况 跳过前面的多个
-            int depth = str.lastIndexOf("\t") + 1;
-            int len = str.substring(depth).length();
+            //多个\t的情况 跳过前面的多个 +1作为offset -> 因为lastIndexOf找不到token的时候返回-1
+            int depth = str.lastIndexOf("\t") + 1; // 当前层是depth+1层
+            int len = str.length() - depth;
             // 遇到 '.' 证明是个文件 可以更新答案 但不能更新depthHash
             if (str.contains(".")) {
+                // 拿到上一层的长度
                 int dirLen = depthHash.get(depth);
                 result = Math.max(result, dirLen + len);
             } else {
-                // len + 1 -> +1 for '/'
+                // 这一层的层数是depth+1, len + 1 -> +1 for '/'
                 depthHash.put(depth + 1, depthHash.get(depth) + len + 1);
             }
         }
+
         return result;
     }
 }

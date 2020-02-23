@@ -48,14 +48,14 @@ public class LC282ExpressionAddOperators {
 
         for (int i = level; i < num.length(); i++) {
             // 消除有leading zeros的选择 只有当这一层开始的时候才去取0 层中间出现的0都跳过
-            if (i != level && num.charAt(level) == '0') return;
-            long curNum = Long.valueOf(num.substring(level, i+1)); // substring方法左闭右开 右端点是i+1
+            if (i != level && num.charAt(level) == '0') break;
+            long curNum = Long.valueOf(num.substring(level, i + 1)); // substring方法左闭右开 右端点是i+1
             if (level == 0) {
-                dfs(num, target, trace+curNum, lstRet+curNum, curNum,i+1, ret);
+                dfs(num, target, String.valueOf(curNum), curNum, curNum,i + 1, ret);
             } else {
-                dfs(num, target, trace+ "+" +curNum, lstRet+curNum, curNum, i+1, ret);
-                dfs(num, target, trace+ "-" +curNum, lstRet-curNum, -curNum, i+1, ret);
-                dfs(num, target, trace+ "*" +curNum, lstRet-preNum+preNum*curNum, preNum*curNum, i+1, ret);
+                dfs(num, target, trace+ "+" +curNum, lstRet+curNum, curNum, i + 1, ret);
+                dfs(num, target, trace+ "-" +curNum, lstRet-curNum, -curNum, i + 1, ret);
+                dfs(num, target, trace+ "*" +curNum, lstRet-preNum+preNum*curNum, preNum * curNum, i + 1, ret);
                 /*
                 if (curNum != 0) {
                     dfs(num, target, trace+ "/" + curNum, lstRet-preNum+preNum/curNum,
