@@ -1,9 +1,6 @@
 package HashMap_HashTable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Given two arrays, write a function to compute their intersection.
@@ -45,7 +42,8 @@ import java.util.Map;
  */
 public class LC350IntersectionOfTwoArraysII {
 
-    public int[] intersect(int[] nums1, int[] nums2) {
+    // version 1: map计数
+    public int[] intersectUsingMap(int[] nums1, int[] nums2) {
         Map<Integer, Integer> map = new HashMap<>();
         for (int i : nums1) {
             int freq = map.getOrDefault(i, 0);
@@ -67,5 +65,82 @@ public class LC350IntersectionOfTwoArraysII {
 
         return ret;
     }
+
+    // version 2: binary search 
+    public int[] intersect(int[] nums1, int[] nums2) {
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+
+        // swap to make nums1's len smaller than nums2's
+        if (nums1.length > nums2.length) {
+            int[] tmp = nums1;
+            nums1 = nums2;
+            nums2 = tmp;
+        }
+
+        List<Integer> res = new ArrayList<>();
+        int prevCnt = 0;
+        for (int i = 0; i < nums1.length; i++) {
+            // 如果是第一个元素 或者 当前元素跟之前的不一样 都要重新二分查找
+            if (i == 0 || nums1[i - 1] != nums1[i]) {
+                prevCnt = getCnt(nums2, nums1[i]);
+                if (prevCnt == 0) continue; // 找不到 直接跳过
+                prevCnt--;
+                res.add(nums1[i]);
+            } else {
+                // 当前元素跟之前的一样
+                if (prevCnt != 0) { // 如果之前的元素在另外的数组里还有
+                    prevCnt--;
+                    res.add(nums1[i]);
+                }
+            }
+        }
+
+        int[] ans = new int[res.size()];
+        int idx = 0;
+        for (int num : res) {
+            ans[idx++] = num;
+        }
+
+        return ans;
+    }
+
+    // 在nums中 找target出现的次数
+    private int getCnt(int[] nums, int target) {
+        int left = binarySearch(nums, target);
+        if (nums[left] != target) return 0;
+        int right = binarySearch(nums, target + 1);
+        // 两种情况 1.right停在target  2.right停在第一个比target大的元素上
+        return nums[right] == target ? right - left + 1 : right - left;
+    }
+
+    // 在nums中找第一个大于或等于target的元素 注意如果不存在 则返回的是target应该插入的位置
+    private int binarySearch(int[] nums, int target) {
+        int lo = 0;
+        int hi = nums.length - 1;
+
+        while (lo < hi) {
+            int mid = lo + (hi - lo) / 2;
+            // 不停Push右边界 (lo+1,hi) 二分模板
+            if (nums[mid] >= target) {
+                hi = mid;
+            } else {
+                lo = mid + 1;
+            }
+        }
+
+        return lo;
+    }
+
+    public static void main(String[] args) {
+        LC350IntersectionOfTwoArraysII inst = new LC350IntersectionOfTwoArraysII();
+        int[] nums1 = {4,9,5};
+        int[] nums2 = {9,4,9,8,4};
+
+        int[] res = inst.intersect(nums1, nums2);
+        System.out.println(".");
+
+    }
+
 
 }

@@ -55,6 +55,8 @@ import java.util.Queue;
  * 思路:
  * 非典型bfs 某个节点可以重复队 因为每个节点到源点的距离是可以被更新的 第一次入队时可能不是最短的距离
  * 所以某个节点出队时 就算是destination 也不能退出循环 需要检查是否可以更新当前的最短距离
+ *
+ * 时间复杂度: O(nm * (m + n)) each node gets visited m+n times
  */
 public class LC505TheMazeII {
 

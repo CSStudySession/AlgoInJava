@@ -12,6 +12,7 @@ package LinkedLists;
  * Output: -1->0->3->4->5
  *
  * 思路: Merge Sort
+ * 复杂度: T(n) = O(nlgn) S(n) = O(lgn)
  */
 public class LC148SortList {
 
@@ -37,6 +38,7 @@ public class LC148SortList {
             }
             cur = cur.next;
         }
+
         if (head1 != null) {
             cur.next = head1;
         } else {

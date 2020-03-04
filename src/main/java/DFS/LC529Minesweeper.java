@@ -61,7 +61,6 @@ public class LC529Minesweeper {
     int x = 0;
 
     public char[][] updateBoard(char[][] board, int[] click) {
-        // Write your code here
         y = board.length;
         x = board[0].length;
         dfs(board, click[0], click[1]);
@@ -99,7 +98,7 @@ public class LC529Minesweeper {
                 }
 
             } else {
-                // 直接mark周围0的数量 然后返回
+                // 直接mark周围炸弹的数量 然后返回
                 board[cur1][cur2] = (char)(count + '0');
             }
         }

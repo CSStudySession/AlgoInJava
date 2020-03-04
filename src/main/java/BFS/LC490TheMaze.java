@@ -42,6 +42,10 @@ import java.util.Queue;
  * The given maze does not contain border (like the red rectangle in the example pictures),
  * but you could assume the border of the maze are all walls.
  * The maze contains at least 2 empty spaces, and both the width and height of the maze won't exceed 100.
+ *
+ * 复杂度:
+ *  T(n) = O(mn * max(m,n))
+ *  to get a neighboring node, we need to go through m or n empty spaces (a.k.a. the while loop within for loop)
  */
 public class LC490TheMaze {
 

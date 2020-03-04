@@ -1,5 +1,7 @@
 package Array;
 
+import java.util.Arrays;
+
 /**
  * Given an array nums of n integers where n > 1,  return an array output
  * such that output[i] is equal to the product of all the elements of nums except nums[i].
@@ -19,6 +21,7 @@ package Array;
  */
 public class LC238ProductOfArrayExceptSelf {
 
+    // version  1: two passes
     public int[] productExceptSelf(int[] nums) {
         int n = nums.length;
         int[] res = new int[n];
@@ -32,6 +35,23 @@ public class LC238ProductOfArrayExceptSelf {
         for (int i = n - 1; i >= 0; i--) {
             res[i] *= right;
             right *= nums[i];
+        }
+
+        return res;
+    }
+
+    // version2: one pass
+    public int[] productExceptSelfOnePass(int[] nums) {
+        int[] res = new int[nums.length];
+        Arrays.fill(res, 1);
+        int left = 1;
+        int right = 1;
+
+        for (int i = 0, j = nums.length - 1; i < nums.length - 1; i++, j--) {
+            left *= nums[i];
+            right *= nums[j];
+            res[i + 1] *= left;
+            res[j - 1] *= right;
         }
 
         return res;
