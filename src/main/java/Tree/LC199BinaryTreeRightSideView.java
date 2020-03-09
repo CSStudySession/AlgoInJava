@@ -26,7 +26,7 @@ import java.util.List;
 public class LC199BinaryTreeRightSideView {
 
     public List<Integer> rightSideView(TreeNode root) {
-        List<Integer> res = new ArrayList<Integer>();
+        List<Integer> res = new ArrayList<>();
         if (root == null) {
             return res;
         }
@@ -44,7 +44,7 @@ public class LC199BinaryTreeRightSideView {
             res.add(root.val);
         }
 
-        helper(root.right, res, level+1);
-        helper(root.left, res, level+1);
+        helper(root.right, res, level + 1);
+        helper(root.left, res, level + 1);
     }
 }

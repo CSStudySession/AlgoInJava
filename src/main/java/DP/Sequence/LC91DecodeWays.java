@@ -42,18 +42,18 @@ public class LC91DecodeWays {
         dp[0] = 1;
         dp[1] = s.charAt(0) != '0' ? 1 : 0;
 
-        for(int i = 2; i <= n; i++) {
-            int oneDigit = Integer.valueOf(s.substring(i-1, i));
-            int twoDigits = Integer.valueOf(s.substring(i-2, i));
+        for (int i = 2; i <= n; i++) {
+            int oneDigit = Integer.valueOf(s.substring(i - 1, i));
+            int twoDigits = Integer.valueOf(s.substring(i - 2, i));
 
             // 出现非法字符
             if (twoDigits == 0) return 0;
 
-            if(oneDigit >= 1 && oneDigit <= 9) {
+            if (oneDigit >= 1 && oneDigit <= 9) {
                 dp[i] = dp[i-1];
             }
 
-            if(twoDigits >= 10 && twoDigits <= 26) {
+            if (twoDigits >= 10 && twoDigits <= 26) {
                 dp[i] += dp[i-2];
             }
         }
