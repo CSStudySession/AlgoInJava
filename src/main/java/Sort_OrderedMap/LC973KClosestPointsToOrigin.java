@@ -32,7 +32,7 @@ import java.util.Arrays;
 public class LC973KClosestPointsToOrigin {
 
     public int[][] kClosest(int[][] points, int K) {
-        int len =  points.length, l = 0, r = len - 1;
+        int len = points.length, l = 0, r = len - 1;
         while (l <= r) {
             int index = helper(points, l, r);
             if (index == K) break;

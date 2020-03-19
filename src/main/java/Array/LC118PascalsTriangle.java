@@ -22,7 +22,7 @@ import java.util.List;
 public class LC118PascalsTriangle {
 
     public List<List<Integer>> generate(int numRows) {
-        List<List<Integer>> triangle = new ArrayList<List<Integer>>();
+        List<List<Integer>> triangle = new ArrayList<>();
 
         // First base case; if user requests zero rows, they get zero rows.
         if (numRows == 0) {

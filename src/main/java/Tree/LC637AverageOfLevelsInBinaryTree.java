@@ -76,7 +76,7 @@ public class LC637AverageOfLevelsInBinaryTree {
         double sum;
         int count;
 
-        Node (double sum,  int count) {
+        Node (double sum, int count) {
             this.sum = sum;
             this.count = count;
         }
